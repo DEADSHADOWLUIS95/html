@@ -1,176 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>COURSES</title>
-  <style>
-      body {
-      background-image: url('https://i.pinimg.com/originals/1d/30/b5/1d30b5a0c298c02edaf2f501b22a6587.gif');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    
-      }
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 40px;
-      background-color: transparent;
-      position: relative;
-      z-index: 10;
-    }
+<style>
+  body {
+    background-image: url('https://cdn.pixabay.com/photo/2017/08/15/08/23/stars-2643089_1280.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
 
-    .ub-logo {
-     width: 200px;
-      height: auto;
-      border-radius: 30px;
-      opacity: 0.89;
-      position: absolute;
-      left: 10px;
-      top: 20px;
-      z-index: 3;
-    }
+  h1 {
+    color: white;
+  }
 
-    .nav-links {
-      display: flex;
-      margin-left: auto;
-      z-index: 4;
-    }
+  p {
+    color: white;
+  }
 
-    .nav-links a {
-      position: relative;
-      margin: 0 10px;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 25px;
-      background-color: black;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
+  
+  img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 10px;
+    background-color: none;
+    padding: 10px;
+  }
 
-    .nav-links a::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 100%;
-      left: 0;
-      background: linear-gradient(45deg, #ff004f, #ff7c00, #00d2ff, #ff004f);
-      background-size: 400%;
-      transition: top 0.3s ease;
-      border-radius: 25px;
-      z-index: -1;
-      animation: glow 20s linear infinite;
-    }
+  
+  .nav-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto); /* 3 per row */
+    gap: 10px; /* space between buttons */
+    justify-content: center; /* centers everything */
+    margin-top: 20px;
+  }
 
-    .nav-links a:hover::before,
-    .nav-links a.active::before {
-      top: 0;
-    }
+  
+  .nav-container button {
+    padding: 10px 20px;
+    border: none;
+    background-color: white;
+    color: black;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: white;
-      transform: scale(1.1);
-    }
+  .nav-container button:hover {
+    background-color: white;
+  }
 
-    
-    @keyframes glow {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    
-    .course-section {
-      padding: 0 20px;
-      max-width: 950px;
-      margin: 100px auto 40px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      color: white;
-      bottom: 60px;
-    
-    
-    }
-
-    .course-section h2 {
-      font-size: 36px;
-      font-weight: bold;
-      margin-bottom: 30px;
-      background-color: none;
-      border-radius: 80px;
-      display: inline-block;
-      padding: 10px 10px;
-      border-bottom: 2px solid none;
-    }
-
-    .course-section p {
-      font-size: 20px;
-      font-weight: bold;
-      margin: 0 auto;
-      max-width: 900px;
-      line-height: 1.4;
-    }
-      footer {
-      text-align: center;
-      padding: 10px;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.6);
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-      font-size: 14px;
-      z-index: 10;
-    } 
- </style>
+  
+  .nav-container button.nav7 {
+    grid-column: 2 / 3; /* puts it in the middle column */
+ 
+  
+</style>
 </head>
-<body>
-  <div class="navbar">
-    <img
-      src="https://tse2.mm.bing.net/th/id/OIP.w3cSK6T5TXjCkt43BK2YcgAAAA?cb=thfvnextucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
-      alt="University of Belize Logo"
-      class="ub-logo"
-    />
-    <div class="nav-links">
-      <a href="index.html" class="active">COURSES</a>
-      <a href="project.html">PROJECT</a>
-      <a href="concepts.html">CONCEPTS</a>
-      <a href="database.html">DATABASES</a>
-      <a href="documentation.html">DOCUMENT</a>
-      <a href="devteam.html">DEVTEAM</a>
-    </div>
-  </div>
 
-  <div class="course-section">
-    <h2>Fundamentals of Computing</h2>
-    <p>
-      This course is an introduction to the fundamentals of Computer Science
-      that will provide students with a foundation for future courses in
-      Computer Science. The course is a broad survey of the discipline through
-      topics that allow students to understand the capabilities of computer
-      systems in terms of: the computer architecture; operating systems and
-      computer networks; software and software development; data organization
-      and visualization; and the potential of computing machines.
-    </p>
-  </div>
+<body>
+
+<h1>Belize Districts Game</h1>
+
+<p><b>Made by Luis.</b></p>
+
+
+<img id="myImage" src="belize_blank.png"><br>
+
+<!-- 🔹 Navigation buttons arranged in grid -->
+<div class="nav-container">
+  <button onclick="document.getElementById('myImage').src='belize_city.png'">Belize</button>
+  <button onclick="document.getElementById('myImage').src='belize_belmopan.png'">Cayo</button>
+  <button onclick="document.getElementById('myImage').src='belize_corozal.png'">Corozal</button>
+  <button onclick="document.getElementById('myImage').src='belize_orangewalk.png'">Orange Walk</button>
+  <button onclick="document.getElementById('myImage').src='belize_stanncreek.png'">Stann Creek</button>
+  <button onclick="document.getElementById('myImage').src='belize_toledo.png'">Toledo</button>
+  <button class="nav7" onclick="document.getElementById('myImage').src='belize_blank.png'">Reset</button>
+</div>
+
 </body>
 </html>
-
-
