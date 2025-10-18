@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>COURSES</title>
+  <title>Concepts</title>
   <style>
-      body {
+    body {
       background-image: url('https://i.pinimg.com/originals/1d/30/b5/1d30b5a0c298c02edaf2f501b22a6587.gif');
       background-size: cover;
       background-position: center;
@@ -13,8 +13,8 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-    
-      }
+    }
+
     .navbar {
       display: flex;
       align-items: center;
@@ -26,9 +26,9 @@
     }
 
     .ub-logo {
-     width: 200px;
-      height: auto;
+      width: 200px;
       border-radius: 30px;
+      height: auto;
       opacity: 0.89;
       position: absolute;
       left: 10px;
@@ -83,7 +83,6 @@
       transform: scale(1.1);
     }
 
-    
     @keyframes glow {
       0% {
         background-position: 0% 50%;
@@ -96,81 +95,117 @@
       }
     }
 
-    
-    .course-section {
-      padding: 0 20px;
-      max-width: 950px;
+    .concepts-section {
+      max-width: 900px;
       margin: 100px auto 40px;
+      padding: 0 20px;
       text-align: center;
       position: relative;
       z-index: 1;
       color: white;
-      bottom: 60px;
-    
-    
+      bottom: 80px;
     }
 
-    .course-section h2 {
+    .concepts-section h1 {
       font-size: 36px;
       font-weight: bold;
-      margin-bottom: 30px;
-      background-color: none;
-      border-radius: 80px;
+      margin-bottom: 20px;
       display: inline-block;
-      padding: 10px 10px;
-      border-bottom: 2px solid none;
+      padding: 15px 30px;
+      color: white; 
     }
 
-    .course-section p {
-      font-size: 20px;
-      font-weight: bold;
+    .image-section {
+      padding: 20px;
+      max-width: 720px;
       margin: 0 auto;
-      max-width: 900px;
-      line-height: 1.4;
+      color: white;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
     }
-      footer {
+
+    .image-section img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer;
+    }
+
+    .image-section p {
+      margin-top: 15px;
+      font-size: 16px;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .recording-link {
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      text-decoration: underline;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    footer {
       text-align: center;
       padding: 10px;
       color: white;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: white;
       position: fixed;
       width: 100%;
       bottom: 0;
       font-size: 14px;
       z-index: 10;
-    } 
- </style>
+    }
+  </style>
 </head>
 <body>
   <div class="navbar">
     <img
       src="https://tse2.mm.bing.net/th/id/OIP.w3cSK6T5TXjCkt43BK2YcgAAAA?cb=thfvnextucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
-      alt="University of Belize Logo"
+      alt="University Logo"
       class="ub-logo"
     />
     <div class="nav-links">
-      <a href="index.html" class="active">COURSES</a>
-      <a href="project.html">PROJECT</a>
-      <a href="concepts.html">CONCEPTS</a>
-      <a href="database.html">DATABASES</a>
-      <a href="documentation.html">DOCUMENT</a>
-      <a href="devteam.html">DEVTEAM</a>
+      <a href="index.html">Course</a>
+      <a href="project.html">Project</a>
+      <a href="concepts.html">Concepts</a>
+      <a href="database.html">Databases</a>
+      <a href="documentation.html">Documentation</a>
+      <a href="devteam.html">Dev Team</a>
     </div>
   </div>
 
-  <div class="course-section">
-    <h2>Fundamentals of Computing</h2>
-    <p>
-      This course is an introduction to the fundamentals of Computer Science
-      that will provide students with a foundation for future courses in
-      Computer Science. The course is a broad survey of the discipline through
-      topics that allow students to understand the capabilities of computer
-      systems in terms of: the computer architecture; operating systems and
-      computer networks; software and software development; data organization
-      and visualization; and the potential of computing machines.
-    </p>
+  <div class="concepts-section">
+    <h1>Concepts</h1>
+
+    <div class="image-section">
+      <a
+        href="https://docs.google.com/presentation/d/15G1kqvFawhj_oiQmr3Zat1TxFlRV2ERSzqZIDnQ_ccU/edit?slide=id.p#slide=id.p"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Concepts Presentation"
+      >
+        <img
+          src="Screenshot 2025-10-11 082702.png"
+          alt="Concepts Presentation"
+        />
+      </a>
+
+      <p>Click on the image above for presentation.</p>
+
+      
+      <a
+        href="https://drive.google.com/file/d/1MQ6RLFJ4ePxckq2uc3vrH9X65NVjI4kb/view"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Concepts Recording"
+        class="recording-link"
+      >
+       Click here to access a special recording.
+      </a>
+    </div>
   </div>
 </body>
 </html>
-
-

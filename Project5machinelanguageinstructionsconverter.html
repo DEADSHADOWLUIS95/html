@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project 5: Machine Language Instructions Converter</title>
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/originals/1d/30/b5/1d30b5a0c298c02edaf2f501b22a6587.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background-color: transparent;
+      position: relative;
+      z-index: 10;
+    }
+
+    .ub-logo {
+      width: 200px;
+      border-radius: 30px;
+      height: auto;
+      opacity: 0.89;
+      position: absolute;
+      left: 10px;
+      top: 20px;
+      z-index: 3;
+    }
+
+    .nav-links {
+      display: flex;
+      margin-left: auto;
+      z-index: 4;
+    }
+
+    .nav-links a {
+      position: relative;
+      margin: 0 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      background-color: black;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-links a::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 100%;
+      left: 0;
+      background: linear-gradient(45deg, #ff004f, #ff7c00, #00d2ff, #ff004f);
+      background-size: 400%;
+      transition: top 0.3s ease;
+      border-radius: 25px;
+      z-index: -1;
+      animation: glow 20s linear infinite;
+    }
+
+    .nav-links a:hover::before,
+    .nav-links a.active::before {
+      top: 0;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: white;
+      transform: scale(1.1);
+    }
+
+    @keyframes glow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Machine Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .left-panel {
+            flex: 1;
+            padding: 30px;
+            background-color: #f8f8f8;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .right-panel {
+            flex: 2;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 40px;
+        }
+        
+        .code-button {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .code-button:hover {
+            background-color: #3367d6;
+        }
+        
+        .code-button.active {
+            background-color: #1a73e8;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .back-link {
+            margin-top: auto;
+            color: #4285f4;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 0;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.3s;
+        }
+        
+        .back-link:hover {
+            border-bottom: 1px solid #4285f4;
+        }
+        
+        .table-container {
+            position: relative;
+        }
+        
+        .instruction-description {
+            position: absolute;
+            left: -220px;
+            top: 0;
+            width: 200px;
+            padding: 15px;
+            background-color: #e8f0fe;
+            border-radius: 4px;
+            border-left: 4px solid #4285f4;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 10;
+        }
+        
+        .instruction-description.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .instruction-description h3 {
+            color: #1a73e8;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .instruction-description p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th, td {
+            padding: 10px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        tr.highlighted {
+            background-color: #e8f0fe;
+            border-left: 4px solid #4285f4;
+        }
+        
+        .copyright {
+            margin-top: auto;
+            padding-top: 20px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1>An Interactive Machine Language</h1>
+            <div class="button-container">
+                <button class="code-button" data-code="156C">156C</button>
+                <button class="code-button" data-code="166D">166D</button>
+                <button class="code-button" data-code="5056">5056</button>
+                <button class="code-button" data-code="306E">306E</button>
+                <button class="code-button" data-code="C000">C000</button>
+            </div>
+            <a href="#" class="back-link">Back to Home</a>
+        </div>
+        
+        <div class="right-panel">
+            <h2>Appendix C: A Simple Machine Language</h2>
+            <div class="table-container">
+                <div class="instruction-description" id="instruction-desc">
+                    <h3 id="code-title"></h3>
+                    <p id="code-description"></p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Op-code</th>
+                            <th>Operand</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-opcode="1">
+                            <td>1</td>
+                            <td>xy</td>
+                            <td>LOAD register R with the bit pattern found in the memory cell whose address is xy.</td>
+                        </tr>
+                        <tr data-opcode="2">
+                            <td>2</td>
+                            <td>xy</td>
+                            <td>LOAD register R with the bit pattern xy.</td>
+                        </tr>
+                        <tr data-opcode="3">
+                            <td>3</td>
+                            <td>xy</td>
+                            <td>STORE the bit pattern found in register R in the memory cell whose address is xy.</td>
+                        </tr>
+                        <tr data-opcode="4">
+                            <td>4</td>
+                            <td>0</td>
+                            <td>MOVE the bit pattern found in register R to register S.</td>
+                        </tr>
+                        <tr data-opcode="5">
+                            <td>5</td>
+                            <td>xy</td>
+                            <td>ADD the bit patterns in registers S and T as though they were two's complement representations and leave the result in register R.</td>
+                        </tr>
+                        <tr data-opcode="6">
+                            <td>6</td>
+                            <td>xy</td>
+                            <td>ADD the bit patterns in registers S and T as though they represented values in floating-point notation and leave the floating-point result in register R.</td>
+                        </tr>
+                        <tr data-opcode="7">
+                            <td>7</td>
+                            <td>xy</td>
+                            <td>OR the bit patterns in registers S and T and place the result in register R.</td>
+                        </tr>
+                        <tr data-opcode="8">
+                            <td>8</td>
+                            <td>xy</td>
+                            <td>AND the bit patterns in registers S and T and place the result in register R.</td>
+                        </tr>
+                        <tr data-opcode="9">
+                            <td>9</td>
+                            <td>xy</td>
+                            <td>XOR the bit patterns in registers S and T and place the result in register R.</td>
+                        </tr>
+                        <tr data-opcode="A">
+                            <td>A</td>
+                            <td>xy</td>
+                            <td>ROTATE the bit pattern in register R one bit to the right x times. Each time place the bit that started at the low-order end at the high-order end.</td>
+                        </tr>
+                        <tr data-opcode="B">
+                            <td>B</td>
+                            <td>xy</td>
+                            <td>JUMP to the instruction located in the memory cell at address xy if the bit pattern in register R is equal to the bit pattern in register 0. Otherwise, continue with the normal sequence of execution.</td>
+                        </tr>
+                        <tr data-opcode="C">
+                            <td>C</td>
+                            <td>00</td>
+                            <td>HALT execution.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="copyright">
+                Copyright © 2023 Computer Science Education. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.code-button');
+            const tableRows = document.querySelectorAll('tbody tr');
+            const instructionDesc = document.getElementById('instruction-desc');
+            const codeTitle = document.getElementById('code-title');
+            const codeDescription = document.getElementById('code-description');
+            
+            // Clear any highlights and descriptions
+            function clearHighlights() {
+                tableRows.forEach(row => {
+                    row.classList.remove('highlighted');
+                });
+                buttons.forEach(button => {
+                    button.classList.remove('active');
+                });
+                instructionDesc.classList.remove('show');
+            }
+            
+            // Handle button clicks
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const code = this.getAttribute('data-code');
+                    const opcode = code.charAt(0).toUpperCase();
+                    
+                    // Clear previous highlights
+                    clearHighlights();
+                    
+                    // Highlight the clicked button
+                    this.classList.add('active');
+                    
+                    // Find and highlight the corresponding table row
+                    tableRows.forEach(row => {
+                        if (row.getAttribute('data-opcode') === opcode) {
+                            row.classList.add('highlighted');
+                            
+                            // Position the description box next to the highlighted row
+                            const rowRect = row.getBoundingClientRect();
+                            const containerRect = row.closest('.table-container').getBoundingClientRect();
+                            const topPosition = rowRect.top - containerRect.top;
+                            
+                            instructionDesc.style.top = `${topPosition}px`;
+                            
+                            // Set the description based on the code
+                            let description = '';
+                            
+                            switch(code) {
+                                case '156C':
+                                    codeTitle.textContent = '156C';
+                                    description = 'Load register 5 with the bit pattern found in the memory cell at address 6C';
+                                    break;
+                                case '166D':
+                                    codeTitle.textContent = '166D';
+                                    description = 'Load register 6 with the bit pattern found in the memory cell at address 6D';
+                                    break;
+                                case '5056':
+                                    codeTitle.textContent = '5056';
+                                    description = 'Add the contents of register 5 and 6 as though they were two\'s complement representations and leave the result in register 0';
+                                    break;
+                                case '306E':
+                                    codeTitle.textContent = '306E';
+                                    description = 'Store the contents of register 0 in memory cell at address 6E';
+                                    break;
+                                case 'C000':
+                                    codeTitle.textContent = 'C000';
+                                    description = 'Halt';
+                                    break;
+                            }
+                            
+                            codeDescription.textContent = description;
+                            instructionDesc.classList.add('show');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+  
+
+  </footer>
+</body>
+</html>
