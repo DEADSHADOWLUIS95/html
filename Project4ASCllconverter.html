@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project 4: ASCII Converter</title>
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/originals/1d/30/b5/1d30b5a0c298c02edaf2f501b22a6587.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background-color: transparent;
+      position: relative;
+      z-index: 10;
+    }
+
+    .ub-logo {
+      width: 200px;
+      border-radius: 30px;
+      height: auto;
+      opacity: 0.89;
+      position: absolute;
+      left: 10px;
+      top: 20px;
+      z-index: 3;
+    }
+
+    .nav-links {
+      display: flex;
+      margin-left: auto;
+      z-index: 4;
+    }
+
+    .nav-links a {
+      position: relative;
+      margin: 0 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      background-color: black;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-links a::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 100%;
+      left: 0;
+      background: linear-gradient(45deg, #ff004f, #ff7c00, #00d2ff, #ff004f);
+      background-size: 400%;
+      transition: top 0.3s ease;
+      border-radius: 25px;
+      z-index: -1;
+      animation: glow 20s linear infinite;
+    }
+
+    .nav-links a:hover::before,
+    .nav-links a.active::before {
+      top: 0;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: white;
+      transform: scale(1.1);
+    }
+
+    @keyframes glow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+   body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            color: white;
+            text-align: center;
+            font-size: 32px;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            font-weight: normal;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .table-section {
+            flex: 2;
+            min-width: 400px;
+        }
+        
+        .converter-section {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ascii-image-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+        
+        .ascii-image-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .ascii-image-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .ascii-image-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        .ascii-image-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .ascii-image {
+            width: 100%;
+            display: block;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        input[type="number"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        
+        .submit-button {
+            padding: 12px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+        
+        .result-group {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .result-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .result-display {
+            padding: 15px;
+            background-color: #e8f5e8;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e7d32;
+            min-width: 100px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .error-message {
+            color: #f44336;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .home-link {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: #2196F3;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Project 4: ASCll Converter</h1>
+                
+        <div class="content-wrapper">
+            <div class="table-section">
+                <div class="ascii-image-container">
+                    <img src="https://z-cdn-media.chatglm.cn/files/0d2cac4b-aae1-459d-ab04-42a248527319_pasted_image_1759978576633.png?auth_key=1791514584-3c02d794f4c14a899b0cb3f3fdc63f0b-0-764d11d927788462b40eb0111b5ea08a" alt="ASCII Table" class="ascii-image">
+                </div>
+            </div>
+            
+            <div class="converter-section">
+                <div class="input-group">
+                    <label class="input-label">Enter any number from 0 to 127:</label>
+                    <input type="number" id="asciiInput" min="0" max="127">
+                    <div class="error-message" id="errorMessage">Please enter a number between 0 and 127</div>
+                </div>
+                
+                <button class="submit-button" onclick="convertToAscii()">Submit</button>
+                
+                <div class="result-group">
+                    <label class="result-label">ASCII Value:</label>
+                    <div class="result-display" id="asciiResult">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a href="#" class="home-link"></a>
+    
+    <script>
+        // ASCII character mapping to match the image table exactly
+        function getAsciiChar(decimal) {
+            const asciiMap = {
+                0: 'NUL',
+                1: 'SOH',
+                2: 'STX',
+                3: 'ETX',
+                4: 'EOT',
+                5: 'ENQ',
+                6: 'ACK',
+                7: 'BEL',
+                8: 'BS',
+                9: 'HT',
+                10: 'LF',
+                11: 'VT',
+                12: 'FF',
+                13: 'CR',
+                14: 'SO',
+                15: 'SI',
+                16: 'DLE',
+                17: 'DC1',
+                18: 'DC2',
+                19: 'DC3',
+                20: 'DC4',
+                21: 'NAK',
+                22: 'SYN',
+                23: 'ETB',
+                24: 'CAN',
+                25: 'EM',
+                26: 'SUB',
+                27: 'ESC',
+                28: 'FS',
+                29: 'GS',
+                30: 'RS',
+                31: 'US',
+                32: 'SP',
+                127: 'DEL'
+            };
+            
+            // Return the mapped control character if it exists
+            if (asciiMap[decimal] !== undefined) {
+                return asciiMap[decimal];
+            }
+            
+            // For printable characters, return the character itself
+            return String.fromCharCode(decimal);
+        }
+        
+        function convertToAscii() {
+            const input = document.getElementById('asciiInput').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const resultDisplay = document.getElementById('asciiResult');
+            
+            // Reset error message
+            errorMessage.style.display = 'none';
+            
+            // Validate input
+            const num = parseInt(input);
+            if (isNaN(num) || num < 0 || num > 127) {
+                errorMessage.style.display = 'block';
+                resultDisplay.textContent = '-';
+                return;
+            }
+            
+            // Convert to ASCII character using the mapping
+            const asciiChar = getAsciiChar(num);
+            resultDisplay.textContent = asciiChar;
+            
+            // Add animation effect
+            resultDisplay.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                resultDisplay.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Allow Enter key to submit
+        document.getElementById('asciiInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                convertToAscii();
+            }
+        });
+    </script>
+</body>
+</html>
+
+  
+
+  </footer>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project 2: AND Gate</title>
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/originals/1d/30/b5/1d30b5a0c298c02edaf2f501b22a6587.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background-color: transparent;
+      position: relative;
+      z-index: 10;
+    }
+
+    .ub-logo {
+      width: 200px;
+      border-radius: 30px;
+      height: auto;
+      opacity: 0.89;
+      position: absolute;
+      left: 10px;
+      top: 20px;
+      z-index: 3;
+    }
+
+    .nav-links {
+      display: flex;
+      margin-left: auto;
+      z-index: 4;
+    }
+
+    .nav-links a {
+      position: relative;
+      margin: 0 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      background-color: black;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-links a::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 100%;
+      left: 0;
+      background: linear-gradient(45deg, #ff004f, #ff7c00, #00d2ff, #ff004f);
+      background-size: 400%;
+      transition: top 0.3s ease;
+      border-radius: 25px;
+      z-index: -1;
+      animation: glow 20s linear infinite;
+    }
+
+    .nav-links a:hover::before,
+    .nav-links a.active::before {
+      top: 0;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: white;
+      transform: scale(1.1);
+    }
+
+    @keyframes glow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+      body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            color:black;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            color: black;
+        }
+        
+        .gate-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin-bottom: 30px;
+            color: white;
+        }
+        
+        .gate-svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .input-line, .output-line {
+            transition: all 0.5s ease;
+        }
+        
+        .active {
+            stroke: #ffcc00 !important;
+            stroke-width: 3px !important;
+            color: white;
+        }
+        
+        .active-text {
+            fill: #000 !important;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .input-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: white;
+        }
+        
+        .input-label {
+            font-size: 18px;
+            font-weight: bold;
+            width: 100px;
+            text-align: right;
+            color: black;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .on-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .on-button:hover {
+            background-color: #45a049;
+        }
+        
+        .off-button {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .off-button:hover {
+            background-color: #d32f2f;
+        }
+        
+        .run-button {
+            background-color: #2196F3;
+            color: white;
+            padding: 12px 30px;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        
+        .run-button:hover {
+            background-color: #0b7dda;
+        }
+        
+       
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Project 2: AND Gate</h1>
+        
+        <div class="gate-container">
+            <svg class="gate-svg" viewBox="0 0 400 300">
+                
+                <path d="M 100 100 L 200 100 A 50 50 0 0 1 200 200 L 100 200 Z" 
+                      fill="none" stroke="#4CAF50" stroke-width="2"/>
+                
+                
+                <line id="input1-line" class="input-line" x1="50" y1="120" x2="100" y2="120" 
+                      stroke="#333" stroke-width="2"/>
+                <line id="input2-line" class="input-line" x1="50" y1="180" x2="100" y2="180" 
+                      stroke="#333" stroke-width="2"/>
+                
+
+                <line id="output-line" class="output-line" x1="250" y1="150" x2="350" y2="150" 
+                      stroke="#333" stroke-width="2"/>
+                
+
+                <text id="input1-text" x="30" y="125" font-size="20" fill="#333">0</text>
+                <text id="input2-text" x="30" y="185" font-size="20" fill="#333">0</text>
+                
+
+                <text id="output-text" x="360" y="155" font-size="20" fill="#333">0</text>
+                
+
+                <text x="150" y="155" font-size="18" fill="#333" text-anchor="middle">AND</text>
+            </svg>
+        </div>
+        
+        <div class="controls">
+            <div class="input-control">
+                <span class="input-label">Input A:</span>
+                <div class="button-group">
+                    <button class="on-button" onclick="setInputA(true)">ON</button>
+                    <button class="off-button" onclick="setInputA(false)">OFF</button>
+                </div>
+            </div>
+            
+            <div class="input-control">
+                <span class="input-label">Input B:</span>
+                <div class="button-group">
+                    <button class="on-button" onclick="setInputB(true)">ON</button>
+                    <button class="off-button" onclick="setInputB(false)">OFF</button>
+                </div>
+            </div>
+            
+            <button class="run-button" onclick="runSimulation()">RUN</button>
+        </div>
+<ul class="project-list">
+      <li><a href="Project2ANDGATE.html"></a></li>
+
+
+        
+       
+    
+    <script>
+        let inputA = false;
+        let inputB = false;
+        let hasRun = false;
+        
+        function setInputA(value) {
+            inputA = value;
+            hasRun = false;
+            updateDisplay();
+        }
+        
+        function setInputB(value) {
+            inputB = value;
+            hasRun = false;
+            updateDisplay();
+        }
+        
+        function runSimulation() {
+            hasRun = true;
+            updateDisplay();
+        }
+        
+        function updateDisplay() {
+            document.getElementById('input1-line').classList.remove('active');
+            document.getElementById('input2-line').classList.remove('active');
+            document.getElementById('output-line').classList.remove('active');
+            document.getElementById('input1-text').classList.remove('active-text');
+            document.getElementById('input2-text').classList.remove('active-text');
+            document.getElementById('output-text').classList.remove('active-text');
+            
+            if (inputA) {
+                document.getElementById('input1-text').textContent = '1';
+                document.getElementById('input1-line').classList.add('active');
+                document.getElementById('input1-text').classList.add('active-text');
+            } else {
+                document.getElementById('input1-text').textContent = '0';
+            }
+            
+
+            if (inputB) {
+                document.getElementById('input2-text').textContent = '1';
+                document.getElementById('input2-line').classList.add('active');
+                document.getElementById('input2-text').classList.add('active-text');
+            } else {
+                document.getElementById('input2-text').textContent = '0';
+            }
+            
+
+            if (hasRun) {
+                const output = inputA && inputB;
+                document.getElementById('output-text').textContent = output ? '1' : '0';
+                
+                if (inputA && inputB) {
+                    document.getElementById('output-line').classList.add('active');
+                    document.getElementById('output-text').classList.add('active-text');
+                }
+            } else {
+                document.getElementById('output-text').textContent = '0';
+            }
+        }
+        
+        function goBack() {
+            inputA = false;
+            inputB = false;
+            hasRun = false;
+            updateDisplay();
+        }
+        
+
+        updateDisplay();
+    </script>
+</body>
+</html> 
+
+  </footer>
+</body>
+</html>
